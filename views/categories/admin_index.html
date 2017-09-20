@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+        <form method="post" action="">
+
+            <div class="form-group">
+                <label for="title">Category name</label>
+                <input type="text" name="category_name" class="form-control" placeholder="Put category name"/>
+            </div>
+            <div class="form-group">
+                <label for="parent">Parent category name</label>
+                <select name="id_parent">
+
+                    <?php
+                    foreach ($data['parents-category'] as $parent) { ?>
+                        <option value="<?= $parent['id'] ?>">
+                            <?= $parent['name'] ?>
+                        </option>
+                    <?php } ?>
+                    <option value="0" selected>
+                        Choose parent category
+                    </option>
+                </select>
+            </div>
+            <input type="submit" class="btn btn-success" value="New category"/>
+        </form>
+        </br></br>
+    </div>
+        <div class="col-md-4">
+
+        </div>
+    <div class="col-md-4">
+
+        <div class="col-md-12">
+            <!--container for categories tree with news-->
+            <?php echo $data['tree']; ?>
+        </div>
+    </div>
+    <div class="col-md-2">
+    </div>
+</div>
+</div>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+  <meta charset="UTF-8">
+  <title><?=Config::get('site_name')?></title>
+
+  <link rel="stylesheet" href="/webroot/css/style.css">
+
+  <!--bootstrap css-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+  <!--jQuery always connect before bootstrap-->
+  <script src="/webroot/js/jquery-3.1.1.min.js"></script>
+  <!--bootstrap js-->
+  <script src="/webroot/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<img src="/webroot/img/bgi/Background.jpg" alt="" class="mainbgk">
+<?=$data['content']?>
+
+</body>
+</html>

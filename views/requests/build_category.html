@@ -1,0 +1,20 @@
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "/requests/build_category/", // Обработчик.
+      data: "search=" + 1,
+      dataType: "html",
+      cache: false,
+      success: function (data) {
+        $(".category-tree").html(data);
+      }
+    })
+  })
+</script>
+
+<ul class="dropdown-menu multi-level category-tree" role="menu" aria-labelledby="dropdownMenu">
+
+</ul>
+

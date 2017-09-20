@@ -1,0 +1,76 @@
+<style type="text/css">
+
+    img{
+        width:100%;
+    }
+
+</style>
+
+<!--carousel from bootstrap-->
+<div class="carousel slide" id="carousel">
+
+    <!--indicator for slides-->
+    <ol class="carousel-indicators">
+        <?php for ($i = 0; $i < count($data['carousel']); $i++) { ?>
+            <li <?php if ($i == 0){ ?>class="active"<?php } ?> data-target="#carousel" data-slide="<?= $id ?>"></li>
+        <?php } ?>
+    </ol>
+
+    <!--slides-->
+    <div class="carousel-inner">
+
+        <?php
+        $active = 1;
+        foreach ($data['carousel'] as $carousel_item) { ?>
+            <div class="item <?php if ($active) { ?> active <?php $active = 0;
+            } ?>">
+
+                <?php
+                switch (App::getRouter()->getMethodPrefix()) {
+                    case 'admin_': ?>
+
+                        <a href="/admin/news/view/<?= $carousel_item['id'] ?>">
+                            <img src="/webroot/uploads/<?= $carousel_item['id'] ?>/main.jpg" alt="main">
+                        </a>
+                        <?php
+                        break;
+
+                    case 'user_': ?>
+
+                        <a href="/user/news/view/<?= $carousel_item['id'] ?>">
+                            <img src="/webroot/uploads/<?= $carousel_item['id'] ?>/main.jpg" alt="main">
+                        </a>
+                        <?php
+                        break;
+
+                    case '':
+                        ?>
+
+                        <a href="/news/view/<?= $carousel_item['id'] ?>">
+                            <img src="/webroot/uploads/<?= $carousel_item['id'] ?>/main.jpg" alt="main">
+                        </a>
+                        <?php
+                        break;
+
+                    default:
+                        break;
+                };
+                ?>
+
+                <div class="carousel-caption">
+                    <h4><?= $carousel_item['title'] ?></h4>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+
+    <a href="#carousel" class="left carousel-control" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a href="#carousel" class="right carousel-control" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+
+
+

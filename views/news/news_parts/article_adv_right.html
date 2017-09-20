@@ -1,0 +1,68 @@
+<style type="text/css">
+
+  img{
+    width:100%;
+  }
+  .some_right{
+
+    background-color: dimgrey;
+    color:white;
+  }
+  .main_right{
+    width: 100%;
+    cursor:pointer;
+  }
+  .box_right{
+
+    display: none;
+    position: absolute;
+    z-index: 2;
+    margin-left: -200px;
+    margin-top: -120px;
+    width: 200px;
+
+    background-color: red;
+    font-weight: bold;
+    color: black;
+
+  }
+</style>
+
+<div>
+
+  <?php
+  foreach ($data['adv_right'] as $adv) {?>
+
+    <div class="some_right">
+
+      <div class="main_right" >
+        <img src="/webroot/uploads/adv/<?=$adv['id']."/adv".$adv['id']?>.jpg">
+      </div>
+      <p class="main_right_firm">Фирма <?=$adv['firm']?></p>
+      <p class="main_right_text"><?=$adv['text']?></p>
+      <div class="box_right">Купон на скидку - примени и получи скидку 10%</div>
+      <p >Цена   <span class="main_right_price" style=""><?=$adv['old_price']?></span></p>
+    </div>
+
+  <?php }?>
+</div>
+
+<script>
+  $('.some_right').mouseenter(function(){
+
+    var newPrice = parseFloat($('.main_right_price').text(),2) * 0.9;
+    $('.main_right_price').css({'color':'black','font-size':'large'});
+    $('.main_right_price').text(newPrice.toFixed(2));
+
+    $('.box_right').fadeIn("slow");
+  })
+  $('.some_right').mouseleave(function(){
+
+    var newPrice = parseFloat($('.main_right_price').text(),2) * 1.1111111111;
+    $('.main_right_price').css({'color':'white','font-size':'inherit'});
+    $('.main_right_price').text(newPrice.toFixed(2));
+
+    $('.box_right').fadeOut("slow");
+  })
+</script>
+

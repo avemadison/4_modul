@@ -1,0 +1,48 @@
+
+
+<!--container for news for category-->
+<div class="container">
+  <?php
+  $role = "";
+  switch (App::getRouter()->getMethodPrefix()) {
+    case 'admin_':
+      $role = "/admin";
+      break;
+
+    case 'user_':
+      $role = "/user";
+      break;
+    default:
+      break;
+  }
+  foreach($data['pagination_news'][$data['current_pag']] as $news) { ?>
+    <div><a href="<?=$role?>/news/view/<?=$news['id']?>"><?=$news['title']?></a></div>
+  <?php }?>
+</div>
+
+<!--pagination-->
+<ul class="pagination">
+
+  <?php if($data['current_pag'] == 0) {?>
+
+    <li class="active"><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/0"> << </a></li>
+    <li class="active"><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=$data['current_pag']?>"> ... </a></li>
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=($data['current_pag']+1)?>"> <?=($data['current_pag']+2)?> </a></li>
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=($data['current_pag']+2)?>"> <?=($data['current_pag']+3)?> </a></li>
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=$data['last_pag']?>"> >> </a></li>
+  <?php } elseif ($data['current_pag'] == $data['last_pag']) {?>
+
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/0"> << </a></li>
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=($data['current_pag']-2)?>"> <?=($data['current_pag']-1)?> </a></li>
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=($data['current_pag']-1)?>"> <?=$data['current_pag']?> </a></li>
+    <li class="active"><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=$data['current_pag']?>"> ... </a></li>
+    <li class="active"><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=$data['last_pag']?>"> >> </a></li>
+  <?php } else {?>
+
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/0"> << </a></li>
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=($data['current_pag']-1)?>"> <?=$data['current_pag']?> </a></li>
+    <li class="active"><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=$data['current_pag']?>"> ... </a></li>
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=($data['current_pag']+1)?>"> <?=($data['current_pag']+2)?> </a></li>
+    <li><a href="<?=$role?>/categories/view/<?=$data['current_category']?>/<?=$data['last_pag']?>"> >> </a></li>
+  <?php }?>
+</ul>

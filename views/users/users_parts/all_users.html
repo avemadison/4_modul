@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <?php
+      $role = (Session::get('role')==null) ? "" : "/" . Session::get('role');
+      $i = 0;
+      ?>
+      <thead>
+      <tr>
+        <th>
+          Login
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Role
+        </th>
+        <?php if ($role == "/admin") { ?>
+          <th>
+            First name
+          </th>
+          <th>
+            Last name
+          </th>
+          <th>
+            Id
+          </th>
+        <?php } ?>
+      </tr>
+      </thead>
+      <tbody>
+      <?php
+      foreach ($data['users'] as $user) { ?>
+        <tr <?php if ($i%2) {?> class="active"<?php } ?> >
+          <td>
+            <a href="<?=$role?>/users/view/<?= $user['id'] ?>"><?= $user['login'] ?></a>
+          </td>
+          <td>
+            <a href="<?=$role?>/users/view/<?= $user['id'] ?>"><?= $user['email'] ?></a>
+          </td>
+          <td>
+            <a href="<?=$role?>/users/view/<?= $user['id'] ?>"><?= $user['date_of_birth'] ?></a>
+          </td>
+          <td>
+            <a href="<?=$role?>/users/view/<?= $user['id'] ?>"><?= $user['role'] ?></a>
+          </td>
+        <?php if ($role == "/admin") { ?>
+          <td>
+            <a href="<?=$role?>/users/view/<?= $user['id'] ?>"><?= $user['first_name'] ?></a>
+          </td>
+          <td>
+            <a href="<?=$role?>/users/view/<?= $user['id'] ?>"><?= $user['last_name'] ?></a>
+          </td>
+          <td>
+            <a href="<?=$role?>/users/view/<?= $user['id'] ?>"><?= $user['id'] ?></a>
+          </td>
+          <td>
+            <a href="<?=$role?>/users/view/<?= $user['id'] ?>"><?= $user['role'] ?></a>
+          </td>
+        <?php } ?>
+        </tr>
+        <?php $i++; } ?>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    # Все адреса в строке адреса перенаправлять в папаку webroot
+    RewriteRule ^$ webroot/ [L]
+    # Если были укзаны допольнительные символы то они предаются как параметр и перенаправляют в webroot
+    RewriteRule (.*) webroot/$1 [L]
+</IfModule>

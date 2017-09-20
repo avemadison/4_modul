@@ -1,0 +1,44 @@
+<!--for pictures of article-->
+<style type="text/css">
+    img {
+        width: 100%;
+    }
+</style>
+
+<div class="carousel slide" id="carousel">
+
+    <!--indicator for slides-->
+    <ol class="carousel-indicators">
+        <?php if (isset($data['carousel'])) {
+            for ($i = 0; $i < count($data['carousel']); $i++) { ?>
+                <li <?php if ($i == 0){ ?>class="active"<?php } ?> data-target="#carousel" data-slide="<?= $id ?>"></li>
+            <?php }
+        } ?>
+    </ol>
+
+    <!--slides-->
+    <div class="carousel-inner">
+
+        <?php
+        $active = 1;
+        if (isset($data['carousel'])) {
+            foreach ($data['carousel'] as $carousel_item) { ?>
+                <div class="item <?php if ($active) { ?> active <?php $active = 0;
+                } ?>">
+
+                    <img src="<?= $carousel_item ?>" style="height: 400px;">
+                </div>
+            <?php }
+        } ?>
+    </div>
+
+    <?php if (isset($data['carousel'])) { ?>
+        <a href="#carousel" class="left carousel-control" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#carousel" class="right carousel-control" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    <?php } ?>
+</div>
+</br>

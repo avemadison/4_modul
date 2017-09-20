@@ -1,0 +1,55 @@
+<style type="text/css">
+  
+  .article_index_item{
+    margin-top: 10px;
+  }
+
+</style>
+
+<div class="article_index_main">
+  <b>All news:</b>
+  <?php
+  if (empty($data['news'])) {
+    Session::setFlash('Now news here');
+  } else {
+
+    switch (App::getRouter()->getMethodPrefix()) {
+      case 'admin_':
+
+        foreach ($data['news'] as $article) { ?>
+
+          <div class="article_index_item">
+
+            <a href="/admin/news/view/<?= $article['id'] ?>"><?= $article['title'] ?></a>
+          </div>
+        <?php }
+        break;
+
+      case 'user_':
+
+        foreach ($data['news'] as $article) { ?>
+
+          <div class="article_index_item">
+
+            <a href="/user/news/view/<?= $article['id'] ?>"><?= $article['title'] ?></a>
+          </div>
+        <?php }
+        break;
+
+      case '':
+
+        foreach ($data['news'] as $article) { ?>
+
+          <div class="article_index_item">
+
+            <a href="/news/view/<?= $article['id'] ?>"><?= $article['title'] ?></a>
+          </div>
+        <?php }
+        break;
+
+      default:
+        break;
+    }
+  } ?>
+</div>
+

@@ -1,0 +1,67 @@
+<style type="text/css">
+
+  img{
+    width:100%;
+  }
+  .some_left{
+
+    background-color: dimgrey;
+    color:white;
+  }
+  .main_left{
+    width: 100%;
+    cursor:pointer;
+  }
+  .box_left{
+
+    display: none;
+    position: absolute;
+    z-index: 2;
+    margin-left: 276px;
+    margin-top: -120px;
+    width: 200px;
+
+    background-color: red;
+    font-weight: bold;
+    color: black;
+  }
+</style>
+
+<div>
+
+  <?php
+  foreach ($data['adv_left'] as $adv) {?>
+
+    <div class="some_left">
+
+      <div class="main_left" >
+        <img src="/webroot/uploads/adv/<?=$adv['id']."/adv".$adv['id']?>.jpg">
+      </div>
+      <p class="main_left_firm">Фирма <?=$adv['firm']?></p>
+      <p class="main_left_text"><?=$adv['text']?></p>
+      <div class="box_left">Купон на скидку - примени и получи скидку 10%</div>
+      <p >Цена   <span class="main_left_price" style=""><?=$adv['old_price']?></span></p>
+    </div>
+
+  <?php }?>
+</div>
+
+<script>
+  $('.some_left').mouseenter(function(){
+
+    var newPrice = parseFloat($('.main_left_price').text(),2) * 0.9;
+    $('.main_left_price').css({'color':'black','font-size':'large'});
+    $('.main_left_price').text(newPrice.toFixed(2));
+
+    $('.box_left').fadeIn("slow");
+  })
+  $('.some_left').mouseleave(function(){
+
+    var newPrice = parseFloat($('.main_left_price').text(),2) * 1.1111111111;
+    $('.main_left_price').css({'color':'white','font-size':'inherit'});
+    $('.main_left_price').text(newPrice.toFixed(2));
+
+    $('.box_left').fadeOut("slow");
+  })
+</script>
+

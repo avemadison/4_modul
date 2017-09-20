@@ -1,0 +1,121 @@
+<!--container for news for category-->
+<div class="container">
+  <?php
+  $role = "";
+  switch (App::getRouter()->getMethodPrefix()) {
+    case 'admin_':
+      $role = "/admin";
+      break;
+
+    case 'user_':
+      $role = "/user";
+      break;
+    default:
+      break;
+  }
+  foreach($data['article_comments'] as $comment) {
+    if ($comment['id_parent'] == 0) { ?>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <blockquote>
+              <p>
+                <?= $comment['text'] ?>
+              </p>
+              <small>Created date: <?= $comment['create_date_time'] ?>
+                <p>
+                  <b class="plus<?= $comment['id'] ?>"<?php if ($role == '/admin' || $role == '/user') { ?>
+                    onclick="addPlus(<?= $comment['id'] ?>)"
+                  <?php } else {
+                    Session::setFlash('You need to log in to rate comments');
+                  } ?>
+                  > + <?= $comment['plus'] ?> </b>
+                  &ensp;
+                  <b class="minus<?= $comment['id'] ?>"
+                      <?php
+                      if ($role == '/admin' || $role == '/user') { ?>
+                        onclick="addMinus(<?= $comment['id'] ?>);"
+                      <?php } else {
+                        Session::setFlash('You need to log in to rate comments');
+                      } ?>
+                  > - <?= $comment['minus'] ?> </b>
+                </p>
+                <cite><a href="<?= $role ?>/news/view/<?= $comment['id_news'] ?>"> Go to news </a></cite>
+                <cite><a href="<?= $role ?>/users/view/<?= $comment['id_user'] ?>">Author</a></cite>
+              </small>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+      <?php foreach ($data['article_comments'] as $answer) {
+
+        if ($answer['id_parent'] == $comment['id']) { ?>
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <blockquote class="pull-right">
+                  <p>
+                    <?= $comment['text'] ?>
+                  </p>
+                  <small>Created date: <?= $answer['create_date_time'] ?>
+                    <p>
+                      <b class="plus<?= $answer['id'] ?>"<?php if ($role == '/admin' || $role == '/user') { ?>
+                        onclick="addPlus(<?= $answer['id'] ?>)"
+                      <?php } else {
+                        Session::setFlash('You need to log in to rate comments');
+                      } ?>
+                      > + <?= $answer['plus'] ?> </b>
+                      &ensp;
+                      <b class="minus<?= $answer['id'] ?>"
+                          <?php
+                          if ($role == '/admin' || $role == '/user') { ?>
+                            onclick="addMinus(<?= $answer['id'] ?>);"
+                          <?php } else {
+                            Session::setFlash('You need to log in to rate comments');
+                          } ?>
+                      > - <?= $answer['minus'] ?> </b>
+                    </p>
+                    <cite><a href="<?= $role ?>/news/view/<?= $answer['id_news'] ?>"> Go to news </a></cite>
+                    <cite><a
+                          href="<?= $role ?>/users/view/<?= $comment['id_user'] ?>">Author</a></cite>
+                  </small>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+
+          <?php
+        }
+      }
+      if ($role == '/admin' || $role == '/user') { ?>
+        <form role="form" class="form-inline" action="" method="post">
+          <div class="col-md-12">
+            <input type="hidden" name="id_news" value="<?= $data['article']['id'] ?>">
+            <input type="hidden" name="id_user" value="<?= Session::get('id') ?>">
+            <input type="hidden" name="id_parent" value="<?= $comment['id'] ?>">
+            <textarea type="text" name="text" class="text_of_comment" placeholder="Put your answer to comment here "
+                      style="width:300%;"></textarea>
+            <input type="submit" class="submit_comment btn btn-active" value="Submit"/>
+          </div>
+        </form>
+      <?php
+      }
+    }
+  }
+
+  ?>
+  <?php if ($role == '/admin' || $role == '/user') {?>
+    <form role="form" class="form-inline" action="" method="post">
+    <div class="col-md-12">
+      <input type="hidden" name="id_news" value="<?=$data['article']['id']?>">
+      <input type="hidden" name="id_user" value="<?=Session::get('id')?>">
+      <input type="hidden" name="id_parent" value="0">
+      <textarea type="text" name="text" class="text_of_comment" placeholder="Put your comment here " style="width:300%;"></textarea>
+      <input type="submit" class="submit_comment btn btn-active" value="Submit"/>
+    </div>
+    </form>
+  <?php } ?>
+</div>

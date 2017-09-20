@@ -1,0 +1,41 @@
+<style type="text/css" xmlns="http://www.w3.org/1999/html">
+    label{
+        font-weight: normal;
+    }
+</style>
+
+<div class="article_filter_main">
+
+    <form role="form">
+
+        <?php
+
+        foreach ($data['attributes'] as $key => $attr_array) { ?>
+
+        <div class="col-md-12 form-group" style="margin-bottom: 10px;">
+
+            <b><?= $key?> : </b>
+        </div>
+
+            <?php
+            foreach ($attr_array as $attr_id => $attr_value) { ?>
+
+                <div class="form-group">
+                    <input
+                        type="checkbox"
+                        value="<?=$attr_id?>"
+                        id="attr_<?=$attr_id?>"
+                        name="filter[]"
+                        <?php if (in_array($attr_id,$data['selected_filters'])) {?> checked = "checked" <?php }?> />
+                    <label for="attr_<?=$attr_id?>"><?=$attr_value?></label>
+                </div>
+                <?php
+            }
+        } ?>
+
+        <input type="submit" class="btn btn-success" value="Set filter"/>
+        <?php $role = (Session::get('role')==null)?"":"/".Session::get('role');?>
+        <input type="button" class="btn" value="Reset filter" onclick='location.href="<?=$role?>/news/?"'>
+    </form>
+</div>
+

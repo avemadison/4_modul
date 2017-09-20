@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    # Если запрошеное имя не является файлом в текущей структуре
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # Если запрошеное имя не папкой файлом в текущей структуре
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # То передаем запросы на index.php
+    RewriteRule ^(.*)$ index.php [PT,L]
+</IfModule>

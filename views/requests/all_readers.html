@@ -1,0 +1,24 @@
+<script type="text/javascript">
+
+    var time = setInterval(function () {
+
+        var article_id = $('.article_id').val();
+        var now_reading = parseInt($('.reading_now').text());
+        $.ajax({
+            type: "POST",
+            url: "/requests/all_readers/", // Обработчик.
+            data: "search=" + article_id + "&reading=" + now_reading,
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+
+                $('.all_readers').text("" + data);
+            }
+        })
+    },5000);
+    $(document).ready(time)
+</script>
+
+All readers <b class="all_readers"></b>
+<input type="hidden" class="article_id" name="all_readers" value="<?= $data['article']['id'] ?>"/>
+

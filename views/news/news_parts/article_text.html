@@ -1,0 +1,46 @@
+<?php
+switch(App::getRouter()->getMethodPrefix())
+{
+  case 'admin_': ?>
+
+      <div class="container">
+        
+        <span><?=$data['article']['text']?></span>
+      </div>
+    <?php
+    break;
+
+  case 'user_': ?>
+
+      <div class="container">
+        
+        <span><?=$data['article']['text']?></span>
+      </div>
+    <?php
+    break;
+
+  case '':
+
+      if ($data['article']['analytical'] == 1) {?>
+      <div class="container">
+        <?php
+        $article_text = explode(". ",$data['article']['text']);
+        array_splice($article_text,5);
+        $article_text = implode(". ",$article_text);
+        echo "<span>" . $article_text . ".</span></br>";
+        echo "<span><a href='/users/login/'> Sorry! Only registered users can watch analytical articles </a><span>";
+        ?>
+      </div>
+      <?php } else { ?>
+          <div class="container">
+
+          <span><?=$data['article']['text']?></span>
+          </div>
+      <?php }
+    break;
+  default:
+    break;
+};
+?>
+</br>
+

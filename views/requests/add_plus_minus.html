@@ -1,0 +1,31 @@
+<script type="text/javascript">
+
+  function addPlus(id) {
+    $.ajax({
+      type: "POST",
+      url: "/requests/add_plus_minus/", // Обработчик.
+      data: "search=" + id + "&symbol=" + 1,
+      dataType: "html",
+      cache: false,
+      success: function (data) {
+        $('.plus' + id).text("+" + data);
+      }
+    })
+  }
+
+  function addMinus(id) {
+    $.ajax({
+      type: "POST",
+      url: "/requests/add_plus_minus/", // Обработчик.
+      data: "search=" + id + "&symbol=" + 2,
+      dataType: "html",
+      cache: false,
+      success: function (data) {
+
+        $('.minus' + id).text("- " + data);
+      }
+    })
+  }
+
+</script>
+

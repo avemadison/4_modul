@@ -1,0 +1,72 @@
+<style type="text/css">
+
+    .home_top_users_name{
+        padding-top: 20px;
+        text-align: center;
+        font-size: 30px;
+        color: #1e33ff;
+    }
+
+    .home_top_users_content{
+        margin-left: 15%;
+        font-size: 40px;
+    }
+
+    .home_top_users_content_element {
+        float: left;
+        margin-left: 20px;">
+    }
+
+</style>
+
+<div class="home_top_users_name">
+
+    TOP 5 users
+</div>
+
+<div class="home_top_users_content"">
+
+    <?php
+    switch (App::getRouter()->getMethodPrefix()) {
+
+        case 'admin_':
+
+            foreach ($data['users'] as $user) { ?>
+
+                <div class="home_top_users_content_element">
+
+                    <a href="/admin/users/view/<?= $user['id_user'] ?>"><?= $user['login'] ?></a>
+                </div>
+            <?php }
+            break;
+
+        case 'user_':
+
+            foreach ($data['users'] as $user) { ?>
+
+                <div class="home_top_users_content_element">
+
+                    <a href="/user/users/view/<?= $user['id_user'] ?>"><?= $user['login'] ?></a>
+                </div>
+            <?php }
+            break;
+
+        case '':
+
+            foreach ($data['users'] as $user) { ?>
+
+                <div class="home_top_users_content_element">
+
+                    <a href="/users/view/<?= $user['id_user'] ?>"><?= $user['login'] ?></a>
+                </div>
+            <?php }
+            break;
+
+        default:
+            break;
+        
+    };
+    ?>
+</div>
+
+

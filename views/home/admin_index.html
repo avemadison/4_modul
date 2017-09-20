@@ -1,0 +1,40 @@
+<div class="col-md-2">
+
+    <div class="col-md-12">
+
+        <a href="/admin/home/add/">
+
+            <button class="btn btn-sm btn-success">
+                <p>New background</p>
+                <p>New color for navigation</p>
+                <p>New adv block</p>
+            </button>
+        </a>
+        </br></br>
+    </div>
+</div>
+
+<div class="col-md-8">
+
+    <div class="col-md-12">
+        <?php include_once VIEWS_PATH.DS."home".DS."home_parts".DS."home_carousel.html";?>
+    </div>
+
+    <div class="col-md-12">
+        <?php include_once VIEWS_PATH.DS."home".DS."home_parts".DS."home_users.html";?>
+    </div>
+
+    <div class="col-md-12">
+        <?php include_once VIEWS_PATH.DS."home".DS."home_parts".DS."home_topics.html";?>
+    </div>
+
+    <div class="col-md-12">
+        <!--container for categories tree with news-->
+        <?php echo $data['tree']; ?>
+    </div>
+
+</div>
+
+<div class="col-md-2">
+
+</div>

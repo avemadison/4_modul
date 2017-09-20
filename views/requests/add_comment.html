@@ -1,0 +1,89 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    var article_id = $('.article_id').val();
+    var now_reading = parseInt($('.reading_now').text());
+    $.ajax({
+      type: "POST",
+      url: "/requests/all_readers/", // Обработчик.
+      data: "search=" + article_id + "&reading=" + now_reading,
+      dataType: "html",
+      cache: false,
+      success: function (data) {
+
+        $('.all_readers').text("" + data);
+      }
+    })
+  })
+</script>
+
+All readers <b class="all_readers"></b>
+<input type="hidden" class="article_id" name="all_readers" value="<?= $data['article']['id'] ?>"/>
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    // Сюда указываем id поля поиска
+    $('.input-search').bind('input', function () {
+
+      var input_search = $(".input-search").val();
+
+      if (input_search.length >= 1 && input_search.length < 150) {
+
+        $.ajax({
+          type: "POST",
+          url: "/requests/search_tags/", // Обработчик.
+          data: "search=" + input_search, // В переменной <strong>q</strong> отправляем ключевое слово в обработчик.
+          dataType: "html",
+          cache: false,
+          success: function (data) {
+
+            $(".block-search-result").show();
+            $(".list-search-result").html(data);
+          }
+        })
+      } else {
+        $(".block-search-result").hide();
+      }
+    })
+  })
+</script>
+
+<style>
+
+  .input-search {
+    height: 29px;
+    width: 355px;
+    border: 1px solid #D8D8D8;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .block-search-result {
+    margin-top: 40px;
+    padding-right: 20px;
+    background-color: silver;
+    position: absolute;
+    z-index: 2;
+    display: none;
+  }
+
+  .search-noresult a{
+    width:50px;
+    background-color: silver;
+    z-index: 2;
+  }
+</style>
+
+<li class="block-search">
+  <form method="post" class="navbar-form navbar-left" role="search">
+    <input type="text" name="search_tags" class="input-search" autocomplete="off" placeholder="Input tag name">
+    <!--        <input type="submit" class="form-search" value="Search">-->
+  </form>
+  <div class="block-search-result">
+    <ul class="list-search-result">
+    </ul>
+  </div>
+</li>
+

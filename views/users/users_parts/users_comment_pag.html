@@ -1,0 +1,72 @@
+<!--container for news for category-->
+<div class="container">
+  <?php
+  $role = "";
+  switch (App::getRouter()->getMethodPrefix()) {
+    case 'admin_':
+      $role = "/admin";
+      break;
+
+    case 'user_':
+      $role = "/user";
+      break;
+    default:
+      break;
+  }
+  foreach($data['pagination_comment'][$data['current_pag']] as $comment) { ?>
+      
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <blockquote>
+            <p>
+              <?=$comment['text']?>
+            </p> <small>Created date: <?=$comment['create_date_time']?>
+              <p>
+                <b class="plus<?=$comment['id']?>"<?php if ($role == '/admin' || $role == '/user') { ?>
+                   onclick="addPlus(<?=$comment['id']?>)"
+                   <?php } else {Session::setFlash('You need to log in to rate comments');}?>
+                > + <?=$comment['plus']?> </b>
+                &ensp;
+                <b class="minus<?=$comment['id']?>"
+                    <?php
+                    if ($role == '/admin' || $role == '/user') { ?>
+                      onclick="addMinus(<?=$comment['id']?>);"
+                    <?php } else {Session::setFlash('You need to log in to rate comments');}?>
+                > - <?=$comment['minus']?> </b>
+              </p>
+              <cite><a href="<?=$role?>/news/view/<?=$comment['id_news']?>"> Go to news </a></cite></small>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+
+  <?php }?>
+</div>
+
+<!--pagination-->
+<ul class="pagination">
+
+  <?php if($data['current_pag'] == 0) {?>
+
+    <li class="active"><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/0"> << </a></li>
+    <li class="active"><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=$data['current_pag']?>"> ... </a></li>
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=($data['current_pag']+1)?>"> <?=($data['current_pag']+2)?> </a></li>
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=($data['current_pag']+2)?>"> <?=($data['current_pag']+3)?> </a></li>
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=$data['last_pag']?>"> >> </a></li>
+  <?php } elseif ($data['current_pag'] == $data['last_pag']) {?>
+
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/0"> << </a></li>
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=($data['current_pag']-2)?>"> <?=($data['current_pag']-1)?> </a></li>
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=($data['current_pag']-1)?>"> <?=$data['current_pag']?> </a></li>
+    <li class="active"><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=$data['current_pag']?>"> ... </a></li>
+    <li class="active"><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=$data['last_pag']?>"> >> </a></li>
+  <?php } else {?>
+
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/0"> << </a></li>
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=($data['current_pag']-1)?>"> <?=$data['current_pag']?> </a></li>
+    <li class="active"><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=$data['current_pag']?>"> ... </a></li>
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=($data['current_pag']+1)?>"> <?=($data['current_pag']+2)?> </a></li>
+    <li><a href="<?=$role?>/users/view/<?=$data['current_comment']?>/<?=$data['last_pag']?>"> >> </a></li>
+  <?php }?>
+</ul>

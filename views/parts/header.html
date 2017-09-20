@@ -1,0 +1,58 @@
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top" ><?php $role = (Session::get('role')==null) ? " " : "/" . Session::get('role'); ?>
+    <div class="col-md-10 maincolor" style="background-color: #000000; width:100%">
+    <?php include_once VIEWS_PATH.DS."requests".DS."header_color.html" ?>
+    <div class="navbar-header">
+
+      <a class="navbar-brand" href="<?=$role?>/"> <?=Config::get('site_name') . "-" . Session::get('login')?></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav">
+          <?php print_r(Session::get('role'));?>
+        <li <?php if(App::getRouter()->getController() == 'home')       {?> class="active" <?php }?> > <a href="<?=$role?>/home/">       HOME       </a></li>
+        <li <?php if(App::getRouter()->getController() == 'news')       {?> class="active" <?php }?> > <a href="<?=$role?>/news/">       NEWS       </a></li>
+        <li <?php if (App::getRouter()->getController() == 'categories') { ?> class="active dropdown" <?php } else { ?> class="dropdown" <?php }?> >
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle">CATEGORIES<b class="caret"></b></a>
+          <?php include_once VIEWS_PATH.DS."requests".DS."build_category.html";?>
+        </li>
+        <li <?php if(App::getRouter()->getController() == 'tags')       {?> class="active" <?php }?> > <a href="<?=$role?>/tags/">       TAGS       </a></li>
+        <li <?php if(App::getRouter()->getController() == 'users')      {?> class="active" <?php }?> > <a href="<?=$role?>/users/">      USERS      </a></li>
+        
+<?php
+  switch(App::getRouter()->getMethodPrefix())
+  {
+    case 'admin_': ?>
+
+      <li <?php if(App::getRouter()->getController() == 'news')       {?> class="active" <?php }?> > <a href="/admin/news/analytical/">     ANALYTICAL </a></li>
+      <li <?php if(App::getRouter()->getController() == 'categories') {?> class="active" <?php }?> > <a href="/admin/categories/political"> POLITICA   </a></li>
+      <li <?php if(App::getRouter()->getController() == 'contact')    {?> class="active" <?php }?> > <a href="/admin/contact/">             CONTACTS   </a></li>
+      <li <?php if(App::getRouter()->getController() == 'logout')     {?> class="active" <?php }?> > <a href="/users/logout/">              LOG OUT    </a></li>
+      <?php break;
+
+    case 'user_': ?>
+      <li <?php if(App::getRouter()->getController() == 'news')       {?> class="active" <?php }?> > <a href="/user/news/analytical/"> ANALYTICAL </a></li>
+      <li <?php if(App::getRouter()->getController() == 'login')      {?> class="active" <?php }?> > <a href="/users/logout/">         LOG OUT    </a></li>
+      <?php break;
+
+    case '': ?>
+      <li <?php if(App::getRouter()->getController() == 'contact')    {?> class="active" <?php }?> > <a href="/contact/">     CONTACT US </a></li>
+      <li <?php if(App::getRouter()->getController() == 'login')      {?> class="active" <?php }?> > <a href="/users/login/"> LOG IN     </a></li>
+      <?php break;
+
+    default:
+      break;
+  };
+?>
+        <?php include_once VIEWS_PATH.DS."requests".DS."search_tags.html";?>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+

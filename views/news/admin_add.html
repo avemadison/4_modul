@@ -1,0 +1,31 @@
+<div class="col-md-2"></div>
+<div class="col-md-10">
+  <div class="col-md-12">
+    <form method="post" action="" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="" class="form-control" placeholder="Input title of the article"/>
+      </div>
+
+      <div class="form-group">
+        <label for="text">Text</label>
+        <textarea type="text" id="text" name="text" value="" class="form-control" placeholder="Input text of the article"></textarea>
+      </div>
+
+      <div class="form-group">
+
+        <label for="image[]">Images</label>
+        <input type="file" id="image" name="image[]" multiple accept="image/*" class="form-control"/>
+      </div>
+
+      <div class="form-group">
+
+        <label for="analytical">Analytics</label>
+        <input type="checkbox" id="analytical" name="analytical" />
+        <input type="submit" class="btn btn-success" value="Add"/>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="col-md-2"></div>

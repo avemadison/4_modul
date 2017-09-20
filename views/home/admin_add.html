@@ -1,0 +1,81 @@
+<div class="col-md-4">
+    <div class="col-md-12">
+        <b>Add new ADVertising block</b>
+        </br></br>
+
+        <form method="post" action="" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="firm">Firm</label>
+                <input type="text" name="firm" class="form-control" placeholder="Input name of the company"/>
+            </div>
+
+            <div class="form-group">
+                <label for="text">Text</label>
+                <textarea name="text" class="form-control" placeholder="Input text of the advrtising" style="width:400px; height: 300px;"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="site">Site</label>
+                <input type="text" name="site" class="form-control" placeholder="Input site of the company"/>
+            </div>
+
+            <div class="form-group">
+                <label for="new_price">New price</label>
+                <input type="text" name="new_price" class="form-control" placeholder="Input new price"/>
+            </div>
+
+            <div class="form-group">
+                <label for="old_price">Old price</label>
+                <input type="text" name="old_price" class="form-control" placeholder="Input old price"/>
+            </div>
+
+            <div class="form-group">
+
+                <label for="image[]">Images</label>
+                <input type="file" id="image" name="image[]" multiple accept="image/*" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Add"/>
+            </div>
+        </form>
+
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="col-md-12">
+        <b>Change background</b>
+        </br></br>
+
+        <form method="post" action="" enctype="multipart/form-data">
+            <div class="form-group">
+
+                <label for="image">Images</label>
+                <input type="file" name="image" accept="image/*" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="bgi" value="1">
+                <input type="submit" class="btn btn-success" value="Add"/>
+            </div>
+        </form>
+
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="col-md-12">
+        <b>Change color of navigation bur</b>
+        </br></br>
+
+        <form method="post" action="" enctype="multipart/form-data">
+            <div class="form-group">
+
+                <label for="color">Color</label>
+                <input type="text" name="color" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Add"/>
+            </div>
+        </form>
+    </div>
+</div>

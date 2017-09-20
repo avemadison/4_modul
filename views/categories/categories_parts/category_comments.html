@@ -1,0 +1,23 @@
+<?php
+foreach ($data['all_comments'] as $comment) { ?>
+
+<form action="" method="post" class="form-group">
+    <blockquote class="pull-left">
+        <div class="form-group">
+
+            <label for="text"> Comment </label>
+        <textarea id="text" name="text" class="form-control"
+                  placeholder="Enter your login name" style="width: 800px;"> <?= $comment['text'] ?> </textarea>
+        </div>
+
+        <div class="form-group">
+
+            <label for="approved"> Approved </label>
+            <input type="checkbox" name="approved" <?php if ($comment['approved'] != null) {?>checked <?php } ?>/>
+            <input type="hidden" name="id" value="<?=$comment['id']?>"/>
+        </div>
+
+        <input type="submit" class="btn btn-success" value="Submit"/>
+    </blockquote>
+</form>
+<?php } ?>

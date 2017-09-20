@@ -1,0 +1,71 @@
+<style type="text/css">
+
+    .home_top_topics_name{
+        padding-top: 20px;
+        text-align: center;
+        font-size: 30px;
+        color: #2ffff5;
+    }
+
+    .home_top_topics_content{
+        font-size: 40px;
+    }
+
+    .home_top_topics_content_element{
+        margin-left: 5%;">
+    }
+
+</style>
+
+<div class="home_top_topics_name">
+
+    TOP 3 topics
+</div>
+
+<div class="home_top_topics_content">
+
+    <?php
+    switch (App::getRouter()->getMethodPrefix()) {
+
+        case 'admin_':
+
+            foreach ($data['topics'] as $topic) { ?>
+
+                <div class="home_top_topics_content_element">
+
+                    <a href="/admin/news/view/<?= $topic['id'] ?>"><?= $topic['title'] ?></a>
+                </div>
+            <?php }
+            break;
+
+        case 'user_':
+
+            foreach ($data['topics'] as $topic) { ?>
+
+                <div class="home_top_topics_content_element">
+
+                    <a href="/user/news/view/<?= $topic['id'] ?>"><?= $topic['title'] ?></a>
+                </div>
+            <?php }
+            break;
+
+        case '':
+
+            foreach ($data['topics'] as $topic) { ?>
+
+                <div class="home_top_topics_content_element">
+
+                    <a href="/news/view/<?= $topic['id'] ?>"><?= $topic['title'] ?></a>
+                </div>
+            <?php }
+            break;
+
+        default:
+            break;
+
+    };
+    ?>
+</div>
+
+
+
